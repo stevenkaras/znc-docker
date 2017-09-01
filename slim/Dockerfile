@@ -21,6 +21,7 @@ RUN set -x \
         icu \
         su-exec \
         tini \
+        zlib \
     && apk add --no-cache --virtual build-dependencies \
         build-base \
         curl \
@@ -30,6 +31,7 @@ RUN set -x \
         libressl-dev \
         perl-dev \
         python3-dev \
+        zlib-dev \
     && mkdir /znc-src && cd /znc-src \
     && curl -fsSL "https://znc.in/releases/archive/znc-${ZNC_VERSION}.tar.gz" -o znc.tgz \
     && curl -fsSL "https://znc.in/releases/archive/znc-${ZNC_VERSION}.tar.gz.sig" -o znc.tgz.sig \
