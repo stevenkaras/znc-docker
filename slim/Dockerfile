@@ -23,8 +23,10 @@ RUN set -x \
         tini \
     && apk add --no-cache --virtual build-dependencies \
         build-base \
+        coreutils \
         curl \
         cyrus-sasl-dev \
+        dkpg-dev dpkg \
         gnupg \
         icu-dev \
         libressl-dev \
@@ -39,7 +41,8 @@ RUN set -x \
     && rm -rf "$GNUPGHOME" \
     && tar -zxf znc.tgz --strip-components=1 \
     && mkdir build && cd build \
-    && ../configure ${CONFIGUREFLAGS} \
+    && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
+    && ../configure --build=\"$gnuArch\" ${CONFIGUREFLAGS} \
     && make $MAKEFLAGS \
     && make install \
     && apk del build-dependencies \
